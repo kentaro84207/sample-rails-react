@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import AppContext from './AppContext';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppContext>
+      <App />
+    </AppContext>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

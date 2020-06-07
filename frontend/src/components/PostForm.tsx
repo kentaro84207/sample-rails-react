@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import writePost from 'services/write-post';
+import React, { useState, useContext } from "react";
+import writePost from "services/write-post";
+import { PostsContext } from "contexts";
 
 const PostForm: React.FC = () => {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
+  const { dispatch } = useContext(PostsContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -11,7 +13,13 @@ const PostForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     writePost(title);
-    setTitle('');
+    dispatch({
+      type: "CREATE_POST",
+      payload: {
+        title: title,
+      },
+    });
+    setTitle("");
   };
 
   return (

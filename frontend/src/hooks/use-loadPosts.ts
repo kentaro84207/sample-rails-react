@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { Post } from 'services/models/post';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import { Post } from "services/models/post";
+import axios from "axios";
 
-const url = 'http://localhost:3000/api/v1/posts';
+const url = "http://localhost:3000/api/v1/posts";
 
-const usePosts = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+const useLoadPosts = () => {
+  const [initPosts, setInitPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -15,7 +15,7 @@ const usePosts = () => {
       try {
         const res = await axios.get(url);
         const items: Post[] = res.data.data;
-        setPosts(items);
+        setInitPosts(items);
         setError(null);
       } catch (error) {
         setError(error);
@@ -26,7 +26,7 @@ const usePosts = () => {
     load();
   }, []);
 
-  return { posts, loading, error };
+  return { initPosts, loading, error };
 };
 
-export default usePosts;
+export default useLoadPosts;

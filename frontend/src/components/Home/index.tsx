@@ -11,7 +11,7 @@ const Home: React.FC = () => {
   return (
     <div>
       <PostForm />
-      {posts.map((post) => (
+      {posts.sort((a,b) => b.id - a.id).map((post) => (
         <PostCard post={post} key={post.id} />
       ))}
     </div>
